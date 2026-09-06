@@ -1,17 +1,11 @@
 Environment record for the CF-STM reproduction bundle
-Recorded: 2026-09-06 21:47:45 JST   (regenerate with: Rscript record_env.R)
+Recorded: 2026-09-06 22:33:41 JST   (regenerate with: Rscript record_env.R)
 ==============================================================================
 
-IMPORTANT -- READ BEFORE USING THIS FILE AS THE REFERENCE ENVIRONMENT
-------------------------------------------------------------------------------
-Package versions below were measured on the machine used to ASSEMBLE the bundle,
-with one exception: KFAS (needed for the GSSM / GSSM-MS rows of Tables 1, 2 and
-A2) is no longer installed there, so its version is recorded from the run
-environment that produced the shipped results/ CSVs.  The sessionInfo() dump at
-the end therefore does not list KFAS.  Ideally, re-record this file in one pass
-on a machine where every package below is installed.
+Every package required to reproduce all tables is installed here, so this is
+a complete record of a working run environment.
 
-Required packages: status and version
+Required packages
 ------------------------------------------------------------------------------
   Rcpp           1.1.1.1.1
   FNN            1.1.4.1
@@ -21,17 +15,25 @@ Required packages: status and version
   withr          3.0.2
   Matrix         1.7.5
   mgcv           1.9.4
-  KFAS           1.6.0   (version used for the shipped results; not
-                         installed on the machine that recorded this file)
+  KFAS           1.6.0
   sdmTMB         1.0.0
   scoringRules   1.1.3
   parallel       4.6.0
 
-A C++ toolchain is also required: src/dglm_chunk.cpp is compiled on first use
-by Rcpp::sourceCpp() via .dglm_load_cpp().
+Hardware and toolchain
+------------------------------------------------------------------------------
+  platform       aarch64-apple-darwin23
+  OS             Darwin 25.5.0
+  CPU            Apple M4 Max
+  cores          16
+  C++ compiler   clang++ -arch arm64 -std=gnu++20
+                 Apple clang version 16.0.0 (clang-1600.0.26.6)
 
-Timing tables (5, 6, A1) are wall-clock measurements and are therefore
-machine-dependent; only the orders-of-magnitude gaps are meant to reproduce.
+  src/dglm_chunk.cpp is compiled on first use by Rcpp::sourceCpp() via
+  .dglm_load_cpp(), so a working C++ toolchain is required.
+
+  Tables 5, 6 and A1 report wall-clock times and are therefore hardware-
+  dependent; only the orders-of-magnitude gaps are meant to reproduce.
 
 sessionInfo()
 ------------------------------------------------------------------------------
@@ -44,20 +46,24 @@ BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dy
 LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
 
 locale:
-[1] C.UTF-8/C.UTF-8/C.UTF-8/C/C.UTF-8/C.UTF-8
+[1] ja_JP.UTF-8/ja_JP.UTF-8/ja_JP.UTF-8/C/ja_JP.UTF-8/ja_JP.UTF-8
 
 time zone: Asia/Tokyo
 tzcode source: internal
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
+[1] parallel  stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+ [1] scoringRules_1.1.3 sdmTMB_1.0.0       KFAS_1.6.0         mgcv_1.9-4        
+ [5] nlme_3.1-169       Matrix_1.7-5       withr_3.0.2        nloptr_2.2.1      
+ [9] dbscan_1.2.4       fields_17.1        RColorBrewer_1.1-3 viridisLite_0.4.3 
+[13] spam_2.11-3        FNN_1.1.4.1        Rcpp_1.1.1-1.1    
 
 loaded via a namespace (and not attached):
- [1] nlme_3.1-169       cli_3.6.6          knitr_1.51         rlang_1.2.0       
- [5] xfun_0.57          otel_0.2.0         generics_0.1.4     dotCall64_1.2     
- [9] assertthat_0.2.1   fields_17.1        dbscan_1.2.4       grid_4.6.0        
-[13] evaluate_1.0.5     MASS_7.3-65        lifecycle_1.0.5    FNN_1.1.4.1       
-[17] compiler_4.6.0     sdmTMB_1.0.0       RColorBrewer_1.1-3 Rcpp_1.1.1-1.1    
-[21] mgcv_1.9-4         maps_3.4.3         lattice_0.22-9     nloptr_2.2.1      
-[25] viridisLite_0.4.3  scoringRules_1.1.3 parallel_4.6.0     splines_4.6.0     
-[29] spam_2.11-3        Matrix_1.7-5       tools_4.6.0        withr_3.0.2       
+ [1] cli_3.6.6        knitr_1.51       rlang_1.2.0      xfun_0.57       
+ [5] otel_0.2.0       generics_0.1.4   dotCall64_1.2    assertthat_0.2.1
+ [9] grid_4.6.0       evaluate_1.0.5   MASS_7.3-65      lifecycle_1.0.5 
+[13] compiler_4.6.0   maps_3.4.3       lattice_0.22-9   splines_4.6.0   
+[17] tools_4.6.0     
