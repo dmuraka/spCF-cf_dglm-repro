@@ -21,8 +21,7 @@ authors:
     affiliation: >-
       Department of Fundamental Statistical Mathematics, Institute of
       Statistical Mathematics, Japan
-    # TODO: add your ORCID, e.g.
-    # orcid: "https://orcid.org/0000-0000-0000-0000"
+    orcid: "https://orcid.org/0000-0002-9544-9542"
 keywords:
   - coarse-to-fine spatiotemporal modeling
   - spatiotemporal prediction
@@ -41,4 +40,5 @@ preferred-citation:
     - family-names: Murakami
       given-names: Daisuke
       email: dmuraka@ism.ac.jp
+      orcid: "https://orcid.org/0000-0002-9544-9542"
   # TODO: add journal / volume / pages / doi when known
