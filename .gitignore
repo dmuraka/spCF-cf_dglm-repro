@@ -1,0 +1,13 @@
+# R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# compiled objects (src/dglm_chunk.cpp is compiled on the fly by Rcpp)
+*.o
+*.so
+*.dll
+
+# OS
+.DS_Store

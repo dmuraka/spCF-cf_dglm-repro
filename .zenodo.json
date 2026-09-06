@@ -1,0 +1,29 @@
+{
+  "title": "Reproduction code for \"Fast covariance-free spatiotemporal modeling via coarse-to-fine learning\"",
+  "description": "<p>Self-contained code and per-replicate results reproducing every table in the Monte Carlo section and the appendices of Murakami (2026), <em>Fast covariance-free spatiotemporal modeling via coarse-to-fine learning</em>: Tables 1-6 (predictive accuracy, coefficient accuracy, computation time, scaling) and Tables A1-A3 (SPDE mesh sensitivity; Gaussian-process DGP).</p><p>CF-STM (<code>cf_dglm</code>) is bundled as standalone R and C++ source in <code>engine/</code> and <code>src/</code>, so no installed <code>spCF</code> package is required. <code>build_tables.R</code> rebuilds every table from the shipped per-replicate CSVs in about a second; <code>run_all.sh</code> regenerates those CSVs from scratch.</p>",
+  "upload_type": "software",
+  "license": "GPL-2.0-or-later",
+  "access_right": "open",
+  "creators": [
+    {
+      "name": "Murakami, Daisuke",
+      "affiliation": "Department of Fundamental Statistical Mathematics, Institute of Statistical Mathematics, Japan"
+    }
+  ],
+  "keywords": [
+    "coarse-to-fine spatiotemporal modeling",
+    "spatiotemporal prediction",
+    "generalized linear mixed model",
+    "scalability",
+    "reproducibility",
+    "R"
+  ],
+  "language": "eng",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/dmuraka/spCF",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+CF-STM reference: 5 seeds
+[1] --- Validation deviance: Basic GLM ---
+[1] --- Validation deviance: Basic GLM ---
+[1] 18433.99
+[1] --- Validation deviance: Learning multi-scale space-time process ---
+[1] 15784.65
+[1] --- Validation deviance: Learning multi-scale space-time process ---
+[1] --- Validation deviance: Basic GLM ---
+[1] --- Validation deviance: Basic GLM ---
+[1] 13382.66
+[1] --- Validation deviance: Learning multi-scale space-time process ---
+[1] 17000.43
+[1] --- Validation deviance: Learning multi-scale space-time process ---
+[1] --- Validation deviance: Basic GLM ---
+[1] 15621.8
+[1] --- Validation deviance: Learning multi-scale space-time process ---
+[1] 17693.24 (Scale 1)
+[1] 15094.47 (Scale 1)
+[1] 16108.59 (Scale 1)
+[1] 11849.53 (Scale 1)
+[1] 14309.94 (Scale 1)
+[1] 17392.74 (Scale 2)
+[1] 14900.33 (Scale 2)
+[1]  11640.6 (Scale 2)
+[1] 15936.93 (Scale 2)
+[1] 14078.19 (Scale 2)
+[1] 17112.59 (Scale 3)
+[1] 14713.99 (Scale 3)
+[1] 11447.95 (Scale 3)
+[1] 13873.22 (Scale 3)
+[1] 15778.26 (Scale 3)
+[1] 16888.71 (Scale 4)
+[1] 16715.47 (Scale 5)
+[1] 14554.46 (Scale 4)
+[1] 11279.07 (Scale 4)
+[1] 15635.56 (Scale 4)
+[1] 13693.37 (Scale 4)
+[1] 14415.48 (Scale 5)
+[1] 11129.17 (Scale 5)
+[1] 15504.49 (Scale 5)
+[1] 13540.26 (Scale 5)
+[1] 16580.31 (Scale 6)
+[1]  14293.1 (Scale 6)
+[1] 16476.53 (Scale 7)
+[1] 11000.91 (Scale 6)
+[1] 15391.45 (Scale 6)
+[1] 13417.28 (Scale 6)
+[1] 14185.42 (Scale 7)
+[1] 10886.64 (Scale 7)
+[1] 15284.31 (Scale 7)
+[1] 13319.92 (Scale 7)
+[1] 16395.98 (Scale 8)
+[1] 14088.81 (Scale 8)
+[1]  10792.5 (Scale 8)
+[1] 15186.78 (Scale 8)
+[1] 13240.54 (Scale 8)
+[1] 16331.41 (Scale 9)
+[1] 13994.88 (Scale 9)
+[1] 10709.37 (Scale 9)
+[1] 15093.68 (Scale 9)
+[1] 13176.61 (Scale 9)
+[1]    16272 (Scale 10)
+[1] 13904.31 (Scale 10)
+[1]  10632.9 (Scale 10)
+[1] 15005.43 (Scale 10)
+[1]  16218.8 (Scale 11)
+[1] 13120.49 (Scale 10)
+[1] 13818.19 (Scale 11)
+[1] 10567.93 (Scale 11)
+[1] 14924.45 (Scale 11)
+[1] 13073.42 (Scale 11)
+[1] 16172.46 (Scale 12)
+[1] 13738.18 (Scale 12)
+[1] 10511.83 (Scale 12)
+[1] 14848.79 (Scale 12)
+[1] 13031.78 (Scale 12)
+[1] 16132.23 (Scale 13)
+[1] 13669.92 (Scale 13)
+[1] 14780.72 (Scale 13)
+[1] 10464.85 (Scale 13)
+[1] 12994.27 (Scale 13)
+[1]  16098.9 (Scale 14)
+[1] 14723.04 (Scale 14)
+[1] 10427.07 (Scale 14)
+[1] 12963.44 (Scale 14)
+[1] 13612.86 (Scale 14)
+[1] 16072.83 (Scale 15)
+[1] 14676.37 (Scale 15)
+[1] 10398.05 (Scale 15)
+[1] 12938.78 (Scale 15)
+[1] 13567.79 (Scale 15)
+[1] 16052.16 (Scale 16)
+[1] 14640.91 (Scale 16)
+[1] 13536.05 (Scale 16)
+[1] 12919.76 (Scale 16)
+[1] 10376.13 (Scale 16)
+[1] 16036.76 (Scale 17)
+[1] 14614.63 (Scale 17)
+[1]  12905.6 (Scale 17)
+[1] 13514.75 (Scale 17)
+[1] 10361.08 (Scale 17)
+[1] 16024.65 (Scale 18)
+[1] 13501.48 (Scale 18)
+[1] 14597.01 (Scale 18)
+[1] 12896.82 (Scale 18)
+[1] 10351.44 (Scale 18)
+[1] 16015.51 (Scale 19)
+[1] 13493.96 (Scale 19)
+[1] 14586.88 (Scale 19)
+[1] 12892.38 (Scale 19)
+[1] 10346.78 (Scale 19)
+[1] 16009.52 (Scale 20)
+[1] 13490.07 (Scale 20)
+[1] 14582.27 (Scale 20)
+[1]  12891.6 (Scale 20)
+[1] 10346.16 (Scale 20)
+[1] 16005.96 (Scale 21)
+[1]  13489.5 (Scale 21)
+[1] 14582.03 (Scale 21)
+[1] 16004.85 (Scale 22)
+[1]  12891.6 (Scale 21) no improvement
+[1] 10346.16 (Scale 21) no improvement
+[1]  13489.5 (Scale 22) no improvement
+[1] 14582.03 (Scale 22) no improvement
+[1] 16004.85 (Scale 23) no improvement
+[1]  12891.6 (Scale 22) no improvement
+[1] 10346.16 (Scale 22) no improvement
+[1]  13489.5 (Scale 23) no improvement
+[1] 14582.03 (Scale 23) no improvement
+[1]  12891.6 (Scale 23) no improvement
+[1] 10346.16 (Scale 23) no improvement
+[1] 16004.85 (Scale 24) no improvement
+[1]  13489.5 (Scale 24) no improvement
+[1] 10346.16 (Scale 24) no improvement
+[1] 14582.03 (Scale 24) no improvement
+[1]  12891.6 (Scale 24) no improvement
+[1] 16004.85 (Scale 25) no improvement
+[1]  13489.5 (Scale 25) no improvement
+[1] 14582.03 (Scale 25) no improvement
+[1]  12891.6 (Scale 25) no improvement
+[1] 10346.16 (Scale 25) no improvement
+[1]  13489.5 (Scale 26) no improvement
+[1] 16004.85 (Scale 26) no improvement
+[1] 14582.03 (Scale 26) no improvement
+[1] 16004.85 (Scale 27) no improvement
+      method cutoff nodes seed      rmse      crps  time
+rmse  CF-STM     NA    NA    1 0.5337260 0.3039495 9.413
+rmse1 CF-STM     NA    NA    2 0.5245443 0.2971693 8.502
+rmse2 CF-STM     NA    NA    3 0.5287483 0.2996071 9.022
+rmse3 CF-STM     NA    NA    4 0.5314342 0.3006512 8.874
+rmse4 CF-STM     NA    NA    5 0.5356706 0.3028142 8.508
+sdmTMB cutoff=0.200 (5 seeds)...
+  nodes=46  RMSE=0.556  CRPS=0.312  time=8.5s
+sdmTMB cutoff=0.100 (5 seeds)...
+  nodes=100  RMSE=0.531  CRPS=0.301  time=49.1s
+sdmTMB cutoff=0.050 (5 seeds)...
+  nodes=325  RMSE=0.530  CRPS=0.301  time=503.1s
+sdmTMB cutoff=0.025 (5 seeds)...
+  nodes=1039  RMSE=0.530  CRPS=0.301  time=8789.6s
+sdmTMB cutoff=0.010 (5 seeds)...

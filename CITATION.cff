@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: >-
+  If you use this code, please cite the paper (preferred-citation below) and,
+  where the exact computational artifact matters, the archived snapshot DOI.
+title: >-
+  Reproduction code for "Fast covariance-free spatiotemporal modeling via
+  coarse-to-fine learning"
+abstract: >-
+  Self-contained code and per-replicate results reproducing every table in the
+  Monte Carlo section and the appendices of Murakami (2026): Tables 1-6 and
+  Tables A1-A3. CF-STM (cf_dglm) is included as standalone R and C++ source, so
+  no installed spCF package is required.
+type: software
+version: 1.0.0
+date-released: "2026-09-06"
+license: GPL-2.0-or-later
+authors:
+  - family-names: Murakami
+    given-names: Daisuke
+    email: dmuraka@ism.ac.jp
+    affiliation: >-
+      Department of Fundamental Statistical Mathematics, Institute of
+      Statistical Mathematics, Japan
+    # TODO: add your ORCID, e.g.
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+keywords:
+  - coarse-to-fine spatiotemporal modeling
+  - spatiotemporal prediction
+  - generalized linear mixed model
+  - scalability
+  - reproducibility
+repository-code: "https://github.com/dmuraka/spCF-cf_dglm-repro"
+# TODO: fill in once the archived snapshot has a DOI
+# doi: "10.5281/zenodo.0000000"
+preferred-citation:
+  type: article
+  title: >-
+    Fast covariance-free spatiotemporal modeling via coarse-to-fine learning
+  year: 2026
+  authors:
+    - family-names: Murakami
+      given-names: Daisuke
+      email: dmuraka@ism.ac.jp
+  # TODO: add journal / volume / pages / doi when known
