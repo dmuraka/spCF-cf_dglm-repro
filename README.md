@@ -44,6 +44,7 @@ sim_repro/
 ├── CITATION.cff                   # machine-readable citation metadata
 ├── .zenodo.json                   # Zenodo deposit metadata
 ├── sessionInfo.txt                # package versions / environment record
+├── record_env.R                   # one command that regenerates sessionInfo.txt
 ├── build_tables.R                 # CSVs in results/ -> formatted Tables 1-6, A1-A3
 ├── run_all.sh                     # regenerate all CSVs, then build_tables.R
 ├── engine/                        # STANDALONE CF-STM (no spCF package)
@@ -160,9 +161,20 @@ journal reference) in `CITATION.cff`, `.zenodo.json`, and this section.
 
 - **License.** GPL-2 or later, matching the spCF package from which the CF-STM
   sources in `engine/` and `src/` are taken (see `LICENSE`).
-- **Environment.** `sessionInfo.txt` records the R and package versions. Note the
-  warning at its head: it was captured on a machine without `KFAS`, so re-record
-  it on a full run environment before archiving.
+- **Environment.** `sessionInfo.txt` records the R version, the version of every
+  required package, the C++ toolchain, and the CPU / core count (the timing
+  tables are wall-clock measurements). Regenerate it with one command, from the
+  bundle root:
+
+  ```sh
+  Rscript record_env.R
+  ```
+
+  Run it on a machine where every required package is installed. If one is
+  missing, the script still writes the file but puts a prominent warning at its
+  head, so an incomplete record cannot be mistaken for a complete one. The
+  shipped copy carries such a warning: it was captured where `KFAS` was absent,
+  so re-record it before archiving.
 - **Requirements.** R with `Rcpp`, `FNN`, `fields`, `dbscan`, `nloptr`,
   `withr`, `Matrix` (CF-STM engine); `mgcv`, `KFAS`, `sdmTMB`,
   `scoringRules`, `parallel` (competitors, scoring, parallelism). A C++

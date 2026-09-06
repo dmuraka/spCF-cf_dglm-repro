@@ -1,5 +1,5 @@
 Environment record for the CF-STM reproduction bundle
-Recorded: 2026-09-06 21:47:45 JST
+Recorded: 2026-09-06 21:47:45 JST   (regenerate with: Rscript record_env.R)
 ==============================================================================
 
 IMPORTANT -- READ BEFORE USING THIS FILE AS THE REFERENCE ENVIRONMENT
