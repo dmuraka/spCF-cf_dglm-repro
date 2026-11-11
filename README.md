@@ -8,7 +8,8 @@ This bundle reproduces the simulation and timing results in Section 4
 
 CF-STM is provided here as **standalone R + C++ source** in `engine/` and `src/`.
 The scripts load it with `source(...)`; **no installed `spCF` package is
-required or assumed** (CF-STM is not yet part of `spCF` at submission time).
+required or assumed**. CF-STM is also available in `spCF`, but the bundle runs
+on its own frozen copy rather than on the packaged version.
 
 ---
 
@@ -164,9 +165,8 @@ The CF-STM implementation itself is distributed in the R package **spCF**
 frozen snapshot that produced the results reported in the paper.
 
 `CITATION.cff` carries the same information in machine-readable form. Before
-archiving, fill in the four `TODO` placeholders (ORCID, repository URL, Zenodo
-DOI, and the journal reference) in `CITATION.cff`, `.zenodo.json`, and this
-section.
+archiving, fill in the remaining `TODO` placeholders (the Zenodo DOI and the
+journal reference) in `CITATION.cff` and this section.
 
 ---
 
