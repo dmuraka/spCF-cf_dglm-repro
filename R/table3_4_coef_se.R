@@ -1,4 +1,5 @@
-## PAPER TABLE: Tables 3 and 4 (coefficient bias, SD, SE, coverage)  (see ../README.md)
+## PAPER TABLE: Table 3 and Supplementary Table A4 (coefficient bias, SD,
+## SE, coverage)  (see ../README.md)
 ###############################################################################
 ## Standard-error (SE) estimation accuracy for the regression slopes.
 ## Methods: GLM, GAM, cf_dglm (CF-STM, robust SE), sdmTMB. KFAS excluded

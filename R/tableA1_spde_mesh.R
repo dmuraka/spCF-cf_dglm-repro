@@ -1,6 +1,6 @@
 ## PAPER TABLE: Table A1 (Appendix 1) -- sensitivity of the SPDE benchmark to the
 ## mesh resolution.  (see ../README.md)
-## sdmTMB mesh-cutoff sweep on the Table-2 (moving-site) DGP.
+## sdmTMB mesh-cutoff sweep on the regular-panel or moving-site DGP.
 ## Compares RMSE / CRPS / time / mesh-nodes across cutoff values; CF-STM shown
 ## as a (mesh-free) reference point. Gaussian family. Results saved incrementally.
 suppressMessages({
@@ -13,6 +13,7 @@ NSEED  <- as.integer(Sys.getenv("NSEED","5"))
 NCORE  <- as.integer(Sys.getenv("NCORE","5"))
 RHO    <- as.numeric(Sys.getenv("RHO","0.7"))
 FAM    <- "gaussian"
+DESIGN <- Sys.getenv("DESIGN","moving")
 ## Cutoffs reported in Table A1.  A finer cutoff of 0.01 is NOT run by default:
 ## a single fit was projected to exceed ten hours (see Appendix 1).  Override with
 ## e.g.  CUTS="0.2,0.1,0.05,0.025,0.01"
@@ -20,7 +21,7 @@ CUTS   <- as.numeric(strsplit(Sys.getenv("CUTS","0.20,0.10,0.05,0.025"),",")[[1]
 OUT    <- Sys.getenv("OUT","results/tableA1_spde_mesh.csv")
 
 ## ---- DGP / split / score (from table2_predictive_moving.R) ------------------
-gen <- function(n_pop=400, T=40, rho=0.7, range=0.10, fam="gaussian", seed=1){
+gen_moving <- function(n_pop=400, T=40, rho=0.7, range=0.10, fam="gaussian", seed=1){
   set.seed(seed); na <- n_pop; anc <- cbind(runif(na), runif(na))
   Wa <- exp(-fields::rdist(anc)/range); Wa <- Wa/sqrt(rowSums(Wa^2))
   b  <- matrix(0,T,na); b[1,] <- as.numeric(Wa%*%rnorm(na))/sqrt(1-rho^2)
@@ -39,12 +40,28 @@ gen <- function(n_pop=400, T=40, rho=0.7, range=0.10, fam="gaussian", seed=1){
   y <- 2*X1 - 1.5*X2 + al + rnorm(N, sd=0.5)
   list(y=y, coords=coords, pt=pt, x=cbind(x1=X1,x2=X2), n_pop=n_pop, T=T)
 }
-split <- function(d, seed=1){
+gen_panel <- function(n_pop=400,T=40,rho=0.7,range=0.10,fam="gaussian",seed=1){
+  set.seed(seed);s<-cbind(runif(n_pop),runif(n_pop));D<-fields::rdist(s);W<-exp(-D/range);W<-W/sqrt(rowSums(W^2))
+  b<-matrix(0,T,n_pop);b[1,]<-as.numeric(W%*%rnorm(n_pop))/sqrt(1-rho^2)
+  for(t in 2:T)b[t,]<-rho*b[t-1,]+as.numeric(W%*%rnorm(n_pop))
+  x1<-matrix(0,T,n_pop);x2<-matrix(0,T,n_pop);for(t in 1:T){x1[t,]<-as.numeric(W%*%rnorm(n_pop));x2[t,]<-as.numeric(W%*%rnorm(n_pop))}
+  pt<-rep(1:T,each=n_pop);loc<-rep(1:n_pop,T);coords<-s[loc,];al<-b[cbind(pt,loc)];X1<-x1[cbind(pt,loc)];X2<-x2[cbind(pt,loc)]
+  y<-2*X1-1.5*X2+al+rnorm(n_pop*T,sd=0.5)
+  list(y=y,coords=coords,pt=pt,loc=loc,x=cbind(x1=X1,x2=X2),n_pop=n_pop,T=T)
+}
+split_moving <- function(d, seed=1){
   set.seed(seed+10000); N <- length(d$y); ix <- logical(N); ix[sample.int(N, round(N*0.30))] <- TRUE
   list(ix=ix, d=d,
        y_tr=d$y[!ix], x_tr=d$x[!ix,,drop=FALSE], c_tr=d$coords[!ix,], p_tr=d$pt[!ix],
        y_te=d$y[ix],  x_te=d$x[ix,,drop=FALSE],  c_te=d$coords[ix,],  p_te=d$pt[ix])
 }
+split_panel <- function(d,seed=1){
+  set.seed(seed+10000);te<-sort(sample.int(d$n_pop,round(d$n_pop*.30)));ix<-d$loc%in%te
+  list(ix=ix,d=d,y_tr=d$y[!ix],x_tr=d$x[!ix,,drop=FALSE],c_tr=d$coords[!ix,],p_tr=d$pt[!ix],
+       y_te=d$y[ix],x_te=d$x[ix,,drop=FALSE],c_te=d$coords[ix,],p_te=d$pt[ix])
+}
+gen <- if(DESIGN=="panel") gen_panel else gen_moving
+split <- if(DESIGN=="panel") split_panel else split_moving
 score <- function(s, mu, tr_res_sd){
   c(rmse=sqrt(mean((s$y_te - mu)^2)),
     crps=mean(scoringRules::crps_norm(s$y_te, mu, pmax(tr_res_sd,1e-6))))
@@ -77,9 +94,9 @@ cf <- mclapply(seeds, function(sd){
   t0 <- proc.time()["elapsed"]
   r  <- tryCatch(m_cfdglm(s, sd), error=function(e) NULL)
   el <- as.numeric(proc.time()["elapsed"]-t0)
-  if(is.null(r)) return(data.frame(method="CF-STM",cutoff=NA,nodes=NA,seed=sd,rmse=NA,crps=NA,time=el))
+  if(is.null(r)) return(data.frame(design=DESIGN,method="CF-STM",cutoff=NA,nodes=NA,seed=sd,rmse=NA,crps=NA,time=el))
   sc <- score(s, r$mu, trsd(s, r$mu_tr))
-  data.frame(method="CF-STM",cutoff=NA,nodes=NA,seed=sd,rmse=sc["rmse"],crps=sc["crps"],time=el)
+  data.frame(design=DESIGN,method="CF-STM",cutoff=NA,nodes=NA,seed=sd,rmse=sc["rmse"],crps=sc["crps"],time=el)
 }, mc.cores=NCORE, mc.preschedule=FALSE)
 all_rows <- c(all_rows, cf); write_out()
 
@@ -92,9 +109,9 @@ for(cut in CUTS){
     r  <- tryCatch(suppressMessages(suppressWarnings(m_sdmtmb(s, cut))), error=function(e) NULL)
     el <- as.numeric(proc.time()["elapsed"]-t0)
     if(is.null(r) || any(!is.finite(r$mu)))
-      return(data.frame(method="sdmTMB",cutoff=cut,nodes=if(is.null(r))NA else r$nodes,seed=sd,rmse=NA,crps=NA,time=el))
+      return(data.frame(design=DESIGN,method="sdmTMB",cutoff=cut,nodes=if(is.null(r))NA else r$nodes,seed=sd,rmse=NA,crps=NA,time=el))
     sc <- score(s, r$mu, trsd(s, r$mu_tr))
-    data.frame(method="sdmTMB",cutoff=cut,nodes=r$nodes,seed=sd,rmse=sc["rmse"],crps=sc["crps"],time=el)
+    data.frame(design=DESIGN,method="sdmTMB",cutoff=cut,nodes=r$nodes,seed=sd,rmse=sc["rmse"],crps=sc["crps"],time=el)
   }, mc.cores=NCORE, mc.preschedule=FALSE)
   all_rows <- c(all_rows, rows); write_out()
   a <- do.call(rbind, rows)

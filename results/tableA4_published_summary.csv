@@ -1,0 +1,5 @@
+method,gaussian_mean_se,gaussian_cov95,poisson_mean_se,poisson_cov95,binary_mean_se,binary_cov95
+GLM,0.012,0.270,0.005,0.185,0.017,0.045
+GAM,0.009,0.275,0.006,0.265,0.020,0.335
+SPDE,0.016,0.935,0.013,0.890,0.032,0.930
+CF-STM,0.027,0.925,0.031,0.970,0.037,0.875

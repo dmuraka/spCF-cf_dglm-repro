@@ -29,8 +29,8 @@ keywords:
   - generalized linear mixed model
   - scalability
   - reproducibility
-repository-code: "https://github.com/dmuraka/spCF-cf_dglm-repro"
-# TODO: fill in once the archived snapshot has a DOI
+# TODO: fill in once the repository is public and archived
+# repository-code: "https://github.com/dmuraka/cfstm-repro"
 # doi: "10.5281/zenodo.0000000"
 preferred-citation:
   type: article
