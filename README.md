@@ -186,8 +186,8 @@ section.
   Run it on a machine where every required package is installed. If one is
   missing, the script still writes the file but puts a prominent warning at its
   head, so an incomplete record cannot be mistaken for a complete one. The
-  shipped copy carries such a warning: it was captured where `KFAS` was absent,
-  so re-record it before archiving.
+  shipped copy was recorded on a machine with every required package installed,
+  so it carries no such warning.
 - **Requirements.** R with `Rcpp`, `FNN`, `fields`, `dbscan`, `nloptr`,
   `withr`, `Matrix` (CF-STM engine); `mgcv`, `KFAS`, `sdmTMB`,
   `scoringRules`, `parallel` (competitors, scoring, parallelism). A C++
