@@ -1,4 +1,4 @@
-## PAPER TABLE: Table 5 (computation-time comparison, all methods)  (see ../README.md)
+## PAPER TABLE: Table 4 (computation-time comparison, all methods)  (see ../README.md)
 ###############################################################################
 ## Computation-time benchmark, ALL methods, on PANEL data (fixed sites).
 ## Grid: T in {40,80,200} x N in {400,800} = 6 cells, 5 reps each.

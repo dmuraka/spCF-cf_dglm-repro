@@ -1,0 +1,11 @@
+design,method,cutoff,rmse,crps,time
+Regular panel,CF-STM,,0.605,0.360,0.54
+Regular panel,SPDE,0.200,0.790,0.443,6.5
+Regular panel,SPDE,0.100,0.653,0.370,36.3
+Regular panel,SPDE,0.050,0.609,0.350,101.1
+Regular panel,SPDE,0.025,0.604,0.350,376.1
+Irregular,CF-STM,,0.531,0.301,8.9
+Irregular,SPDE,0.200,0.556,0.312,8.5
+Irregular,SPDE,0.100,0.531,0.301,49.7
+Irregular,SPDE,0.050,0.530,0.301,503.2
+Irregular,SPDE,0.025,0.530,0.301,8790.5

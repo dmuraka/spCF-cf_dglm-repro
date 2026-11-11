@@ -1,9 +1,10 @@
-# Reproducibility: Section 4 (Monte Carlo experiments), Tables 1–6
+# Reproducibility for Section 4 and Supplementary Tables A1–A7
 
-This bundle reproduces every table in Section 4 of
+This bundle reproduces the simulation and timing results in Section 4
+(Tables 1–5) and Supplementary Appendices 1–5 (Tables A1–A7) of
 
-> Murakami et al. (2026), *Coarse-to-fine dynamic spatio-temporal models*
-> (CF-STM / CF-DGLMM).
+> Murakami, D. (2026), *Fast covariance-free spatiotemporal modeling via
+> coarse-to-fine learning* (CF-STM).
 
 CF-STM is provided here as **standalone R + C++ source** in `engine/` and `src/`.
 The scripts load it with `source(...)`; **no installed `spCF` package is
@@ -13,19 +14,19 @@ required or assumed** (CF-STM is not yet part of `spCF` at submission time).
 
 ## Quick start
 
-Build the tables from the shipped per-replicate result CSVs (takes ~1 second,
+Build the tables from the shipped result CSVs (takes ~1 second,
 compiles nothing):
 
 ```r
 # from this directory
-Rscript build_tables.R    # prints Tables 1-6 and A1-A3
+Rscript build_tables.R    # prints Tables 1-5 and A1-A7
 ```
 
 Regenerate the result CSVs from scratch (heavy — see cost warning below), then
 rebuild:
 
 ```sh
-bash run_all.sh              # NSEED=100 NCORE=12 NREP=5 by default
+bash run_all.sh              # NSEED=100 NCORE=12 NREP=5 by default; many hours
 # quick smoke run:
 NSEED=10 NREP=1 bash run_all.sh
 ```
@@ -45,7 +46,7 @@ sim_repro/
 ├── .zenodo.json                   # Zenodo deposit metadata
 ├── sessionInfo.txt                # package versions / environment record
 ├── record_env.R                   # one command that regenerates sessionInfo.txt
-├── build_tables.R                 # CSVs in results/ -> formatted Tables 1-6, A1-A3
+├── build_tables.R                 # CSVs in results/ -> Tables 1-5 and A1-A7
 ├── run_all.sh                     # regenerate all CSVs, then build_tables.R
 ├── engine/                        # STANDALONE CF-STM (no spCF package)
 │   ├── cf_dglm.R                  #   fit + prediction (CF-STM)
@@ -57,12 +58,16 @@ sim_repro/
 ├── R/
 │   ├── table1_predictive_panel.R  # Table 1 + Table 2 (regular panel)
 │   ├── table2_predictive_moving.R # Table 2 (irregular / moving sites)
-│   ├── table3_4_coef_se.R         # Table 3 + Table 4
-│   ├── table5_timing.R            # Table 5
-│   ├── table6_scaling.R           # Table 6
+│   ├── table3_4_coef_se.R         # Table 3 + Supplementary Table A4
+│   ├── table5_timing.R            # Table 4
+│   ├── table6_scaling.R           # Table 5
 │   ├── tableA1_spde_mesh.R        # Table A1 (Appendix 1)
 │   ├── tableA2_gp_predictive.R    # Table A2 (Appendix 2)
-│   └── tableA3_gp_coef.R          # Table A3 (Appendix 2)
+│   ├── tableA3_gp_coef.R          # Table A3 (Appendix 2)
+│   ├── tableA5_A6_temporal_sensitivity.R
+│   ├── tableA5_scalewise_ml.R
+│   └── tableA7_predictive_calibration.R
+├── sensitivity/                   # extended engine used only for A5-A7
 └── results/                       # per-replicate CSVs (inputs to build_tables.R)
     ├── table1_2_panel_rho02.csv   ├── table1_2_panel_rho07.csv
     ├── table2_moving_rho02.csv    ├── table2_moving_rho07.csv
@@ -70,7 +75,10 @@ sim_repro/
     ├── table5_timing.csv          ├── table6_scaling.csv
     ├── tableA1_spde_mesh.csv      (+ .log)
     ├── tableA2_gp_rho02.csv       ├── tableA2_gp_rho07.csv
-    └── tableA3_gp_coef_rho07.csv
+    ├── tableA3_gp_coef_rho07.csv
+    ├── tableA5_Q_sweep.csv        ├── tableA5_scalewise_ml.csv
+    ├── tableA6_rho_scalewise.csv
+    └── tableA7_coverage_<design>_rho<02|07>.csv
 ```
 
 ---
@@ -82,12 +90,18 @@ sim_repro/
 | **1** | Predictive RMSE/CRPS, regular panel, ρ∈{0.2,0.7} | `table1_predictive_panel.R` | `table1_2_panel_rho{02,07}.csv` |
 | **2** | RMSE of SPDE vs CF-STM, regular **and** irregular | `table1_predictive_panel.R` (regular) + `table2_predictive_moving.R` (irregular) | `table1_2_panel_rho{02,07}.csv`, `table2_moving_rho{02,07}.csv` |
 | **3** | Bias & std.dev of β̂, regular panel, ρ=0.7 | `table3_4_coef_se.R` | `table3_4_coef_se_rho07.csv` |
-| **4** | Mean SE & 95% coverage of β̂, ρ=0.7 | `table3_4_coef_se.R` | `table3_4_coef_se_rho07.csv` |
-| **5** | Computation time, all methods, regular panel | `table5_timing.R` | `table5_timing.csv` |
-| **6** | CF-STM computation time (estimation + prediction), larger panels | `table6_scaling.R` | `table6_scaling.csv` |
-| **A1** | SPDE mesh-cutoff sensitivity (RMSE/CRPS/time), moving-site Gaussian | `tableA1_spde_mesh.R` | `tableA1_spde_mesh.csv` |
+| **4** | Computation time, all methods, regular panel | `table5_timing.R` | `table5_timing.csv` |
+| **5** | CF-STM computation time (estimation + prediction), larger panels | `table6_scaling.R` | `table6_scaling.csv` |
+| **A1** | SPDE mesh-cutoff sensitivity, regular and irregular Gaussian designs | `tableA1_spde_mesh.R` | `tableA1_spde_mesh.csv`; frozen reported summary in `tableA1_published_summary.csv` |
 | **A2** | Predictive RMSE/CRPS under the **Gaussian-process DGP**, ρ∈{0.2,0.7} | `tableA2_gp_predictive.R` | `tableA2_gp_rho{02,07}.csv` |
 | **A3** | Bias & std.dev of β₁ under the **Gaussian-process DGP**, ρ=0.7 | `tableA3_gp_coef.R` | `tableA3_gp_coef_rho07.csv` |
+| **A4** | Mean SE and 95% coverage of β₁ | `table3_4_coef_se.R` | `table3_4_coef_se_rho07.csv`; frozen reported summary in `tableA4_published_summary.csv` |
+| **A5** | Sensitivity to shared temporal parameters | `tableA5_A6_temporal_sensitivity.R`, `tableA5_scalewise_ml.R` | `tableA5_Q_sweep.csv`, `tableA5_scalewise_ml.csv` |
+| **A6** | Scale-wise estimates of ρ | `tableA5_A6_temporal_sensitivity.R` | `tableA6_rho_scalewise.csv` |
+| **A7** | Coverage and width of predictive intervals | `tableA7_predictive_calibration.R` | `tableA7_coverage_<design>_rho<02|07>.csv` |
+
+The manuscript's Table 6 is the Tokyo land-price application rather than a
+simulation table and is therefore outside this simulation bundle.
 
 ### Method-label mapping
 
@@ -149,11 +163,10 @@ The CF-STM implementation itself is distributed in the R package **spCF**
 (<https://github.com/dmuraka/spCF>); the copy in `engine/` and `src/` is the
 frozen snapshot that produced the results reported in the paper.
 
-Repository: <https://github.com/dmuraka/spCF-cf_dglm-repro>
-
 `CITATION.cff` carries the same information in machine-readable form. Before
-archiving, fill in the remaining `TODO` placeholders (ORCID, Zenodo DOI, and the
-journal reference) in `CITATION.cff`, `.zenodo.json`, and this section.
+archiving, fill in the four `TODO` placeholders (ORCID, repository URL, Zenodo
+DOI, and the journal reference) in `CITATION.cff`, `.zenodo.json`, and this
+section.
 
 ---
 
@@ -179,17 +192,20 @@ journal reference) in `CITATION.cff`, `.zenodo.json`, and this section.
   `withr`, `Matrix` (CF-STM engine); `mgcv`, `KFAS`, `sdmTMB`,
   `scoringRules`, `parallel` (competitors, scoring, parallelism). A C++
   toolchain is needed to compile `src/dglm_chunk.cpp` on first use.
-- **Timing tables (5 & 6) are machine-dependent.** The shipped values are
+- **Timing tables (4 & 5) are machine-dependent.** The shipped values are
   5-replicate means from a single workstation and will differ on other
   hardware; only the orders-of-magnitude gaps are meant to be reproducible.
-  The most expensive competitor cell in Table 5 (GSSM-MS at N=800, T=200,
+  The most expensive competitor cell in Table 4 (GSSM-MS at N=800, T=200,
   ≈44 min per fit) was measured in a separate single run.
-- All shipped `results/` CSVs reproduce the printed tables: Tables 1–6 and
-  A2, A3 match the paper to the printed precision, and Table A1 matches on
-  RMSE/CRPS. The Table A1 *timing* column differs from the paper by about 1%
-  (49.1 vs 49.7 s at cutoff 0.10; 8789.6 vs 8790.5 s at 0.025), because the
-  paper's timings were transcribed from an earlier run on the same machine;
-  wall-clock times are machine- and run-dependent in any case.
+- `build_tables.R` uses the model-based predictive-distribution runs for the
+  CRPS columns of Tables 1 and A2, matching the current manuscript. The older
+  point-prediction CSVs remain the source of RMSE and coefficient results.
+- `tableA1_published_summary.csv` and `tableA4_published_summary.csv` freeze
+  the values printed in the submitted supplement. The corresponding
+  per-replicate scripts are included; rerun timing values will naturally vary
+  by machine, and coverage can vary by Monte Carlo version/seed set.
+- Table A7 regeneration does not save observation-level prediction files by
+  default. Set `SAVE_PREDS=1` if those large intermediate RDS files are needed.
 - `R/tableA1_spde_mesh.R` does not run the cutoff 0.01 case by default: a single
   fit was projected to exceed ten hours (as stated in Appendix 1). Add it with
   `CUTS="0.2,0.1,0.05,0.025,0.01"`.

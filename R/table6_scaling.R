@@ -1,4 +1,4 @@
-## PAPER TABLE: Table 6 (CF-STM computation-time scaling)  (see ../README.md)
+## PAPER TABLE: Table 5 (CF-STM computation-time scaling)  (see ../README.md)
 ###############################################################################
 ## cf_dglm computation-time scaling study (latest single-pass cf_dglm / cf_dglm_hv
 ## ONLY -- no other methods). PANEL data (fixed sites): N sites x T times.
